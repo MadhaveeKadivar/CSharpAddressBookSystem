@@ -8,10 +8,11 @@ namespace AddressBookSystem
 {
     internal class AddressBook
     {
-        List<PersonInput> addressbook = new List<PersonInput>();
-        public void AddRecords()
+        List<PersonInput> addressbook = new List<PersonInput>(); // Creating List having PersonInput Class Object Datatype
+        public void AddRecords() // Creating class method to add Person Record in List
         {
-            PersonInput input = new PersonInput();
+            PersonInput input = new PersonInput();// Creating a object of PersonInput Class
+            // Getting all the details from user and store it in PersonInput Class variales through object
             Console.WriteLine("Enter your First Name : ");
             input.fName = Console.ReadLine();
             Console.WriteLine("Enter your Last Name : ");
@@ -27,32 +28,14 @@ namespace AddressBookSystem
             Console.WriteLine("Enter your Phone Number : ");
             input.phoneNumber = Convert.ToInt64(Console.ReadLine());
             Console.WriteLine("Enter your Email Address: ");
-            input.email = Console.ReadLine();
-            if(addressbook.Count==0)
-            {
-                addressbook.Add(input);
-;           }
-            else
-            {
-                foreach (var record in addressbook)
-                {
-                    if (record == input)
-                    {
-                        Console.WriteLine("This record is already present in AddressBook");
-                    }
-                    else
-                    {
-                        addressbook.Add(input);
-                        Console.WriteLine("Record Added successfully in Address Book");
-                    }
-                }
-            }
-                                
+            input.email = Console.ReadLine();          
+            addressbook.Add(input); // Adding all the details of user as a one record in List
+            Console.WriteLine("Record Added successfully in Address Book");                                
         }
-        public void PrintRecords()
+        public void PrintRecords() // Creating a class method to just display all the records of list
         {
             int i = 1;
-            foreach (var record in addressbook)
+            foreach (var record in addressbook) // Accessing all the records of list one by one using foreach loop
             {
                 Console.WriteLine("\n\nRecord - "+i);
                 Console.WriteLine("First Name : "+record.fName);
