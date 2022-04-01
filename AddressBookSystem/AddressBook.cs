@@ -37,7 +37,6 @@ namespace AddressBookSystem
             int i = 1;
             foreach (var record in addressbook) // Accessing all the records of list one by one using foreach loop
             {
-
                 Console.WriteLine("\n\nRecord - "+i);
                 Console.WriteLine("First Name : "+record.fName);
                 Console.WriteLine("Last Name : "+record.lName);
@@ -47,7 +46,6 @@ namespace AddressBookSystem
                 Console.WriteLine("Email : "+record.email);
                 Console.WriteLine("Zip code : "+record.zip);
                 Console.WriteLine("Phone Number : "+record.phoneNumber);
-
                 i++;
             }
         }
