@@ -10,7 +10,7 @@ namespace AddressBookSystem
     {
         static void Main(string[] args)
         {
-            AddressBook records = new AddressBook();
+            AddressBook records = new AddressBook(); // Creating a object of AddressBook class
             while (true)
             {
                 Console.WriteLine("\n\nWelcome to Address Book System");               
@@ -19,28 +19,27 @@ namespace AddressBookSystem
                 Console.WriteLine("4.Exit");
                 Console.WriteLine("\nEnter your choice : ");
                 
-                int ch = Convert.ToInt32(Console.ReadLine());
+                int ch = Convert.ToInt32(Console.ReadLine()); // Storing a user choice in variable
                 switch (ch)
                 {
                     case 1:
-                        records.AddRecords();
-                        records.PrintRecords();
+                        records.AddRecords(); // Calling a method of AddressBook class to add record in address book
+                        records.PrintRecords(); // Calling a method of AddressBook class to display records of address book
                         break;
                     case 2:
                         Console.WriteLine("Enter your First Name : ");
-                        string fn = Console.ReadLine();
+                        string fn = Console.ReadLine(); // Store the user firstname in variable
                         Console.WriteLine("Enter your Last Name : ");
-                        string ln = Console.ReadLine();
-                        records.UpdateRecords(fn, ln);
-                        records.PrintRecords();
+                        string ln = Console.ReadLine();// Store the user last name in variable
+                        records.UpdateRecords(fn, ln); // Calling a method of AddressBook class to update records of address book with passing first name and last name as arguments
+                        records.PrintRecords(); // Calling a method of AddressBook class to display records of address book
                         break;
                     case 4:
-                        System.Environment.Exit(0);
+                        System.Environment.Exit(0); // Exit
                         break;
                 }
                 Console.ReadLine();
             }
-
         }
     }
 }
