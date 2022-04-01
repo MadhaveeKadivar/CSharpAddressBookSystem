@@ -8,6 +8,7 @@ namespace AddressBookSystem
 {
     internal class PersonInput
     {
+        // Declaring class variable to get the all the details from user
         public string fName { get; set; }
         public string lName { get; set; }
         public string address { get; set; }
