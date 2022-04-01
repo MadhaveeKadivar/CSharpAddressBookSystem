@@ -47,7 +47,6 @@ namespace AddressBookSystem
                 }
                 Console.ReadLine();
             }
-
         }
     }
 }
