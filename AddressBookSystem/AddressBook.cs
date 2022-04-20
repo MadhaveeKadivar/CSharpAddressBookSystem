@@ -10,11 +10,15 @@ namespace AddressBookSystem
     {
         
         List<string> addressBookName = new List<string>(); // Creating a list to maintain address book name
-        List<string> cityName = new List<string>(); // Creating a list to maintain address book name
-        List<string> stateName = new List<string>(); // Creating a list to maintain address book name
-        Dictionary<string, List<PersonInput>> recordsByCity = new Dictionary<string, List<PersonInput>>();
-        Dictionary<string, List<PersonInput>> recordsByState = new Dictionary<string,List<PersonInput>>();
+        List<string> cityName = new List<string>(); // Creating a list to maintain city name
+        List<string> stateName = new List<string>(); // Creating a list to maintain state name
+        Dictionary<string, List<PersonInput>> recordsByCity = new Dictionary<string, List<PersonInput>>(); // Creating dictionary to Maintain all the records by city name
+        Dictionary<string, List<PersonInput>> recordsByState = new Dictionary<string,List<PersonInput>>(); // Creating dictionary to Maintain all the records by state name
         Dictionary<string, List<PersonInput>> dict = new Dictionary<string, List<PersonInput>>(); // Creating dictionary to Maintain all the address book 
+        /// <summary>
+        /// Ceating a Multiple address book
+        /// </summary>
+        /// <param name="n"></param>
         public void CreateAddressBook(string n) // class method to create new address book and store it in dictionary
         {
             addressBookName.Add(n.ToLower()); // Add address book name which is provided by user  in address book list
@@ -36,6 +40,10 @@ namespace AddressBookSystem
                 
             }            
         }
+        /// <summary>
+        /// Storing all unique city names in List
+        /// </summary>
+        /// <param name="city"></param>
         public void cityNames(string city)
         {
             if(cityName.Count == 0)
@@ -54,6 +62,10 @@ namespace AddressBookSystem
                 }
             }
         }
+        /// <summary>
+        /// Storing all unique state names in List
+        /// </summary>
+        /// <param name="state"></param>
         public void stateNames(string state)
         {
             if (stateName.Count == 0)
@@ -72,7 +84,11 @@ namespace AddressBookSystem
                 }
             }
         }
+
         public int temp = 0;
+        /// <summary>
+        /// Displaying all the address book
+        /// </summary>
         public void DiplayListOfAddressBook() // Class method to display name Address book
         {
             if (addressBookName.Count == 0) // Checking that address book list is empty or not
@@ -90,6 +106,9 @@ namespace AddressBookSystem
                 }
             }
         }
+        /// <summary>
+        /// Displaying all the record by address book
+        /// </summary>
         public void DisplayDictionary() // Class method to display all the records of all address book
         {            
             foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
@@ -111,6 +130,10 @@ namespace AddressBookSystem
                 }
             }
         }
+        /// <summary>
+        /// Adding record in dictionary
+        /// </summary>
+        /// <param name="name"></param>
         public void AddRecords(string name) // Creating class method to add Person Record in List
         {
             PersonInput input = new PersonInput(); // Creating a object of PersonInput Class
@@ -169,6 +192,10 @@ namespace AddressBookSystem
                    
         }     
         string fn, ln;
+        /// <summary>
+        /// Updating records in Dictionary 
+        /// </summary>
+        /// <param name="ab"></param>
         public void UpdateRecords(string ab) // Creating class method to update record which takes first name and last name as parameter
         {
             foreach (var content in dict.Keys)  // Accessing all the record of address book by dictionary key
@@ -285,6 +312,45 @@ namespace AddressBookSystem
                 }
             }
         }
+        /// <summary>
+        /// Display all the persons by state name
+        /// </summary>
+        /// <param name="sName"></param>
+        public void DisplayPersonsByStateName(string sName)
+        {
+            foreach (var state in stateName)
+            {
+                if (sName.Equals(state))
+                {
+                    Console.WriteLine($"\nAll records present in multiple address books where state name \"{state}\" are : ");
+                    foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
+                    {
+                        Console.WriteLine("\n\nAddress Book : "+content);
+                        int i = 1;
+                        foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
+                        {
+                            if (value.state == state)
+                            {
+                                Console.WriteLine("\nRecord - "+i);
+                                Console.WriteLine("First Name : "+value.fName);
+                                Console.WriteLine("Last Name : "+value.lName);
+                                Console.WriteLine("Address : "+value.address);
+                                Console.WriteLine("City : "+value.city);
+                                Console.WriteLine("State : "+value.state);
+                                Console.WriteLine("Email : "+value.email);
+                                Console.WriteLine("Zip code : "+value.zip);
+                                Console.WriteLine("Phone Number : "+value.phoneNumber);
+                                i++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Display all the persons by city name
+        /// </summary>
+        /// <param name="cName"></param>
         public void DisplayPersonsByCityName(string cName) // Class method to display all the records of all address book
         {
             foreach (var city in cityName)
@@ -316,13 +382,16 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void AddPersonsInDictionaryByCityName() // Class method to display all the records of all address book
+        /// <summary>
+        /// Maintain dictionary of persons by city name 
+        /// </summary>
+        public void AddPersonsInDictionaryByCityName()
         {
             foreach (var city in cityName)
             {
-                foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
+                foreach (var content in dict.Keys) 
                 {
-                    foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
+                    foreach (var value in dict[content].ToList()) 
                     {
                         if (value.city == city)
                         {
@@ -332,13 +401,16 @@ namespace AddressBookSystem
                 }                
             }
         }
-        public void AddPersonsInDictionaByStateName() // Class method to display all the records of all address book
+        /// <summary>
+        /// Maintain dictionary of persons by state name 
+        /// </summary>
+        public void AddPersonsInDictionaByStateName()
         {
             foreach (var state in stateName)
             {
-                foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
+                foreach (var content in dict.Keys)
                 {
-                    foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
+                    foreach (var value in dict[content].ToList()) 
                     {
                         if (value.state == state)
                         {
@@ -349,36 +421,38 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void DisplayPersonsByStateName(string sName) // Class method to display all the records of all address book
+        /// <summary>
+        /// Count the total number of persons by city name
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public int CountPersonsByCity(string c)
         {
-            foreach (var state in stateName)
+            foreach (var city in recordsByCity.Keys)
             {
-                if (sName.Equals(state))
+                if(city.Equals(c.ToLower()))
                 {
-                    Console.WriteLine($"\nAll records present in multiple address books where state name \"{state}\" are : ");
-                    foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
-                    {
-                        Console.WriteLine("\n\nAddress Book : "+content);
-                        int i = 1;
-                        foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
-                        {
-                            if (value.state == state)
-                            {
-                                Console.WriteLine("\nRecord - "+i);
-                                Console.WriteLine("First Name : "+value.fName);
-                                Console.WriteLine("Last Name : "+value.lName);
-                                Console.WriteLine("Address : "+value.address);
-                                Console.WriteLine("City : "+value.city);
-                                Console.WriteLine("State : "+value.state);
-                                Console.WriteLine("Email : "+value.email);
-                                Console.WriteLine("Zip code : "+value.zip);
-                                Console.WriteLine("Phone Number : "+value.phoneNumber);
-                                i++;
-                            }
-                        }
-                    }
+                    return recordsByCity[city].Count;
                 }
             }
+            return 0; 
         }
+        /// <summary>
+        /// Count the total number of persons by state name
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public int CountPersonsByState(string s)
+        {
+            foreach (var state in recordsByState.Keys)
+            {
+                if (state.Equals(s.ToLower()))
+                {
+                    return recordsByState[state].Count;
+                }
+            }
+            return 0;
+        }
+        
     }
 }

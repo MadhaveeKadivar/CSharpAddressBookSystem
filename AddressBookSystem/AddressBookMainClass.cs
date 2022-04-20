@@ -22,6 +22,9 @@ namespace AddressBookSystem
                 Console.WriteLine("4. Display all persons by City name");
                 Console.WriteLine("5. Display all persons by State name");
                 Console.WriteLine("6. Store the All Persons by city and state name in Dictionary");
+                Console.WriteLine("7. Numbers of persons count by City name");
+                Console.WriteLine("8. Numbers of persons count by State name");
+                Console.WriteLine("9. Exit");
                 Console.WriteLine("\nEnter your choice : ");
                 
                 int ch = Convert.ToInt32(Console.ReadLine());// Storing a user choice in variable
@@ -88,12 +91,12 @@ namespace AddressBookSystem
                         }                        
                         break;
                     case 4:
-                        Console.WriteLine("Enter any city name : ");
+                        Console.WriteLine("\nEnter any city name : ");
                         string city = Console.ReadLine();
                         records.DisplayPersonsByCityName(city);
                         break;
                     case 5:
-                        Console.WriteLine("Enter any state name : ");
+                        Console.WriteLine("\nEnter any state name : ");
                         string state = Console.ReadLine();
                         records.DisplayPersonsByStateName(state);
                         break;
@@ -101,7 +104,19 @@ namespace AddressBookSystem
                         records.AddPersonsInDictionaByStateName();
                         records.AddPersonsInDictionaryByCityName();
                         break;
+                    case 7:
+                        records.AddPersonsInDictionaryByCityName();
+                        Console.WriteLine("\nEnter any city name : ");
+                        string cn = Console.ReadLine();
+                        records.CountPersonsByCity(cn);
+                        break;
                     case 8:
+                        records.AddPersonsInDictionaByStateName();
+                        Console.WriteLine("\nEnter any state name : ");
+                        string sn = Console.ReadLine();
+                        records.CountPersonsByState(sn);
+                        break;
+                    case 9:
                         System.Environment.Exit(0); // Exit
                         break;
                 }
