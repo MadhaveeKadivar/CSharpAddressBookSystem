@@ -21,7 +21,7 @@ namespace AddressBookSystem
                 Console.WriteLine("3. Delete a Record");
                 Console.WriteLine("4. Display all persons by City name");
                 Console.WriteLine("5. Display all persons by State name");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("6. Store the All Persons by city and state name in Dictionary");
                 Console.WriteLine("\nEnter your choice : ");
                 
                 int ch = Convert.ToInt32(Console.ReadLine());// Storing a user choice in variable
@@ -95,9 +95,13 @@ namespace AddressBookSystem
                     case 5:
                         Console.WriteLine("Enter any state name : ");
                         string state = Console.ReadLine();
-                        records.DisplayPersonsByCityName(state);
+                        records.DisplayPersonsByStateName(state);
                         break;
                     case 6:
+                        records.AddPersonsInDictionaByStateName();
+                        records.AddPersonsInDictionaryByCityName();
+                        break;
+                    case 8:
                         System.Environment.Exit(0); // Exit
                         break;
                 }
