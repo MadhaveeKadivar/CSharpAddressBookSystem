@@ -10,27 +10,66 @@ namespace AddressBookSystem
     {
         
         List<string> addressBookName = new List<string>(); // Creating a list to maintain address book name
+        List<string> cityName = new List<string>(); // Creating a list to maintain address book name
+        List<string> stateName = new List<string>(); // Creating a list to maintain address book name
+
         Dictionary<string, List<PersonInput>> dict = new Dictionary<string, List<PersonInput>>(); // Creating dictionary to Maintain all the address book 
         public void CreateAddressBook(string n) // class method to create new address book and store it in dictionary
         {
-            addressBookName.Add(n); // Add address book name which is provided by user  in address book list
+            addressBookName.Add(n.ToLower()); // Add address book name which is provided by user  in address book list
 
             if (dict.Count == 0) // Checking that dictionary is empty or not
             {
-                dict.Add(n, new List<PersonInput>()); // // creating key value pair where address book name is key and all the redord of address book as value
+                dict.Add(n.ToLower(), new List<PersonInput>()); // // creating key value pair where address book name is key and all the redord of address book as value
             }
             else
             {
-                if (dict.ContainsKey(n)) // Checking that address book given by user is already present in dictionary or not
+                if (dict.ContainsKey(n.ToLower())) // Checking that address book given by user is already present in dictionary or not
                 {
                     Console.WriteLine("This AddressBook is also present");
                 }
                 else
                 {
-                    dict.Add(n, new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
+                    dict.Add(n.ToLower(), new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
                 }
                 
             }            
+        }
+        public void cityNames(string city)
+        {
+            if(cityName.Count == 0)
+            {
+                cityName.Add(city.ToLower());
+            }
+            else
+            {
+                if(cityName.Contains(city))
+                {
+                    return;
+                }
+                else
+                {
+                    cityName.Add(city.ToLower());
+                }
+            }
+        }
+        public void stateNames(string state)
+        {
+            if (stateName.Count == 0)
+            {
+                stateName.Add(state.ToLower());
+            }
+            else
+            {
+                if (stateName.Contains(state.ToLower()))
+                {
+                    return;
+                }
+                else
+                {
+                    stateName.Add(state.ToLower());
+                }
+            }
         }
         public int temp = 0;
         public void DiplayListOfAddressBook() // Class method to display name Address book
@@ -98,6 +137,8 @@ namespace AddressBookSystem
                     if (dict[content].Count == 0)
                     {
                         dict[name].Add(input);// Adding person record in Address book 
+                        cityNames(input.city);
+                        stateNames(input.state);
                         Console.WriteLine("\nRecord Added successfully in Address Book");
                     }
                     else
@@ -107,6 +148,8 @@ namespace AddressBookSystem
                             if (value != input) // Checking that phone number provided by user is matching with Existing Reord or not
                             {
                                 dict[name].Add(input);// Adding person record in Address book 
+                                cityNames(input.city);
+                                stateNames(input.state);
                                 Console.WriteLine("\nRecord Added successfully in Address Book");
                             }
                             else
@@ -238,6 +281,68 @@ namespace AddressBookSystem
                 else
                 {
                     Console.WriteLine("Address book not found");
+                }
+            }
+        }
+        public void DisplayPersonsByCityName(string cName) // Class method to display all the records of all address book
+        {
+            foreach (var city in cityName)
+            {
+                if (cName.Equals(city))
+                {
+                    Console.WriteLine($"\nAll records present in multiple address books where city name \"{city}\" are : ");
+                    foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
+                    {
+                        Console.WriteLine("\n\nAddress Book : "+content);
+                        int i = 1;
+                        foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
+                        {
+                            if (value.city == city)
+                            {
+                                Console.WriteLine("\nRecord - "+i);
+                                Console.WriteLine("First Name : "+value.fName);
+                                Console.WriteLine("Last Name : "+value.lName);
+                                Console.WriteLine("Address : "+value.address);
+                                Console.WriteLine("City : "+value.city);
+                                Console.WriteLine("State : "+value.state);
+                                Console.WriteLine("Email : "+value.email);
+                                Console.WriteLine("Zip code : "+value.zip);
+                                Console.WriteLine("Phone Number : "+value.phoneNumber);
+                                i++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public void DisplayPersonsByStateName(string sName) // Class method to display all the records of all address book
+        {
+            foreach (var state in stateName)
+            {
+                if (sName.Equals(state))
+                {
+                    Console.WriteLine($"\nAll records present in multiple address books where state name \"{state}\" are : ");
+                    foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
+                    {
+                        Console.WriteLine("\n\nAddress Book : "+content);
+                        int i = 1;
+                        foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
+                        {
+                            if (value.state == state)
+                            {
+                                Console.WriteLine("\nRecord - "+i);
+                                Console.WriteLine("First Name : "+value.fName);
+                                Console.WriteLine("Last Name : "+value.lName);
+                                Console.WriteLine("Address : "+value.address);
+                                Console.WriteLine("City : "+value.city);
+                                Console.WriteLine("State : "+value.state);
+                                Console.WriteLine("Email : "+value.email);
+                                Console.WriteLine("Zip code : "+value.zip);
+                                Console.WriteLine("Phone Number : "+value.phoneNumber);
+                                i++;
+                            }
+                        }
+                    }
                 }
             }
         }
