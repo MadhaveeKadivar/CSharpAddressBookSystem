@@ -108,13 +108,15 @@ namespace AddressBookSystem
                         records.AddPersonsInDictionaryByCityName();
                         Console.WriteLine("\nEnter any city name : ");
                         string cn = Console.ReadLine();
-                        records.CountPersonsByCity(cn);
+                        int cc = records.CountPersonsByCity(cn);
+                        Console.WriteLine($"Total number of records where city name is {cn} are : {cc} ");
                         break;
                     case 8:
                         records.AddPersonsInDictionaByStateName();
                         Console.WriteLine("\nEnter any state name : ");
                         string sn = Console.ReadLine();
-                        records.CountPersonsByState(sn);
+                        int sc = records.CountPersonsByState(sn);
+                        Console.WriteLine($"Total number of records where city name is {sn} are : {sc} ");
                         break;
                     case 9:
                         System.Environment.Exit(0); // Exit
