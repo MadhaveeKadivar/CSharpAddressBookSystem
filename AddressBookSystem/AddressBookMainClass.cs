@@ -24,7 +24,8 @@ namespace AddressBookSystem
                 Console.WriteLine("6. Store the All Persons by city and state name in Dictionary");
                 Console.WriteLine("7. Numbers of persons count by City name");
                 Console.WriteLine("8. Numbers of persons count by State name");
-                Console.WriteLine("9. Exit");
+                Console.WriteLine("9. Display All the records in Alphabetically order By person first name");
+                Console.WriteLine("10. Exit");
                 Console.WriteLine("\nEnter your choice : ");
                 
                 int ch = Convert.ToInt32(Console.ReadLine());// Storing a user choice in variable
@@ -32,7 +33,7 @@ namespace AddressBookSystem
                 {
                     case 1:
                         string n;
-                        Console.WriteLine("\nDo you want to add records in new Address Book ? If yes then press 1 : ");
+                        Console.WriteLine("\nDo you want to add records in new Address Book ?\nIf yes then press 1 otherwise press any key to displaying existing address book : ");
                         string c = Console.ReadLine(); // Storing a user choice in variable
                         if (c == "1")
                         {
@@ -108,19 +109,29 @@ namespace AddressBookSystem
                         records.AddPersonsInDictionaryByCityName();
                         Console.WriteLine("\nEnter any city name : ");
                         string cn = Console.ReadLine();
-                        records.CountPersonsByCity(cn);
+                        int cc = records.CountPersonsByCity(cn);
+                        Console.WriteLine(cc);
                         break;
                     case 8:
                         records.AddPersonsInDictionaByStateName();
                         Console.WriteLine("\nEnter any state name : ");
                         string sn = Console.ReadLine();
-                        records.CountPersonsByState(sn);
+                        int sc = records.CountPersonsByState(sn);
+                        Console.WriteLine(sc);
                         break;
                     case 9:
+                        records.SortByPersonName();
+                        break;
+                    case 10:
                         System.Environment.Exit(0); // Exit
                         break;
                 }
-                Console.ReadLine();
+                Console.WriteLine("\n\nPlease enter to continue....Otherwise press any key to exit");
+                string e = Console.ReadLine();
+                if(e != String.Empty)
+                {
+                    System.Environment.Exit(0);
+                }
             }
         }
     }

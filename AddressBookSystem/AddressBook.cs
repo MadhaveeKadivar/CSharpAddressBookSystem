@@ -8,7 +8,7 @@ namespace AddressBookSystem
 {
     internal class AddressBook
     {
-        
+       
         List<string> addressBookName = new List<string>(); // Creating a list to maintain address book name
         List<string> cityName = new List<string>(); // Creating a list to maintain city name
         List<string> stateName = new List<string>(); // Creating a list to maintain state name
@@ -16,16 +16,18 @@ namespace AddressBookSystem
         Dictionary<string, List<PersonInput>> recordsByState = new Dictionary<string,List<PersonInput>>(); // Creating dictionary to Maintain all the records by state name
         Dictionary<string, List<PersonInput>> dict = new Dictionary<string, List<PersonInput>>(); // Creating dictionary to Maintain all the address book 
         /// <summary>
-        /// Ceating a Multiple address book
+        /// Creating a Multiple address book
         /// </summary>
         /// <param name="n"></param>
         public void CreateAddressBook(string n) // class method to create new address book and store it in dictionary
         {
-            addressBookName.Add(n.ToLower()); // Add address book name which is provided by user  in address book list
-
+            if (!(addressBookName.Contains(n)))
+            { 
+                addressBookName.Add(n); // Add address book name which is provided by user  in address book list
+            }
             if (dict.Count == 0) // Checking that dictionary is empty or not
             {
-                dict.Add(n.ToLower(), new List<PersonInput>()); // // creating key value pair where address book name is key and all the redord of address book as value
+                dict.Add(n.ToLower(), new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
             }
             else
             {
@@ -36,8 +38,7 @@ namespace AddressBookSystem
                 else
                 {
                     dict.Add(n.ToLower(), new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
-                }
-                
+                }               
             }            
         }
         /// <summary>
@@ -98,13 +99,23 @@ namespace AddressBookSystem
             }
             else
             {
+                Console.WriteLine("\n\nList of existing Address Book Are : ");
                 foreach (string list in addressBookName) // Accessing all the names in address book
-                {
-                    Console.WriteLine("\n\nList of existing Address Book Are : ");
+                {                    
                     Console.WriteLine(list);
                     Console.WriteLine();
                 }
             }
+        }
+        public void RecordsDisplay(PersonInput value)
+        {          
+            Console.WriteLine("First Name : "+value.fName);
+            Console.WriteLine("Last Name : "+value.lName);
+            Console.WriteLine("Address : "+value.address);
+            Console.WriteLine("City : "+value.city);
+            Console.WriteLine("State : "+value.state);
+            Console.WriteLine("Email : "+value.email);
+            Console.WriteLine("Zip code : "+value.zip);
         }
         /// <summary>
         /// Displaying all the record by address book
@@ -116,16 +127,9 @@ namespace AddressBookSystem
                 Console.WriteLine("\n\nAddress Book : "+content);
                 int i = 1;
                 foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
-                {                   
+                {
                     Console.WriteLine("\nRecord - "+i);
-                    Console.WriteLine("First Name : "+value.fName);
-                    Console.WriteLine("Last Name : "+value.lName);
-                    Console.WriteLine("Address : "+value.address);
-                    Console.WriteLine("City : "+value.city);
-                    Console.WriteLine("State : "+value.state);
-                    Console.WriteLine("Email : "+value.email);
-                    Console.WriteLine("Zip code : "+value.zip);
-                    Console.WriteLine("Phone Number : "+value.phoneNumber);
+                    RecordsDisplay(value);
                     i++;
                 }
             }
@@ -186,11 +190,15 @@ namespace AddressBookSystem
                 else
                 {
                     Console.WriteLine($"\n{content} Address Book not found");
-                }
-             
-            }
-                   
-        }     
+                }             
+            }                   
+        }
+
+        internal void AddPersonsInDictionaByStateName()
+        {
+            throw new NotImplementedException();
+        }
+
         string fn, ln;
         /// <summary>
         /// Updating records in Dictionary 
@@ -332,14 +340,7 @@ namespace AddressBookSystem
                             if (value.state == state)
                             {
                                 Console.WriteLine("\nRecord - "+i);
-                                Console.WriteLine("First Name : "+value.fName);
-                                Console.WriteLine("Last Name : "+value.lName);
-                                Console.WriteLine("Address : "+value.address);
-                                Console.WriteLine("City : "+value.city);
-                                Console.WriteLine("State : "+value.state);
-                                Console.WriteLine("Email : "+value.email);
-                                Console.WriteLine("Zip code : "+value.zip);
-                                Console.WriteLine("Phone Number : "+value.phoneNumber);
+                                RecordsDisplay(value);
                                 i++;
                             }
                         }
@@ -365,16 +366,9 @@ namespace AddressBookSystem
                         foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
                         {
                             if (value.city == city)
-                            {                               
+                            {
                                 Console.WriteLine("\nRecord - "+i);
-                                Console.WriteLine("First Name : "+value.fName);
-                                Console.WriteLine("Last Name : "+value.lName);
-                                Console.WriteLine("Address : "+value.address);
-                                Console.WriteLine("City : "+value.city);
-                                Console.WriteLine("State : "+value.state);
-                                Console.WriteLine("Email : "+value.email);
-                                Console.WriteLine("Zip code : "+value.zip);
-                                Console.WriteLine("Phone Number : "+value.phoneNumber);
+                                RecordsDisplay(value);
                                 i++;
                             }
                         }
@@ -382,42 +376,115 @@ namespace AddressBookSystem
                 }
             }
         }
-        /// <summary>
-        /// Maintain dictionary of persons by city name 
-        /// </summary>
+        public void CityDictionary(string city) // class method to create new address book and store it in dictionary
+        {
+
+            if (recordsByCity.Count == 0) // Checking that dictionary is empty or not
+            {
+                recordsByCity.Add(city.ToLower(), new List<PersonInput>()); // // creating key value pair where address book name is key and all the redord of address book as value
+            }
+            else
+            {
+                if (recordsByCity.ContainsKey(city.ToLower())) // Checking that address book given by user is already present in dictionary or not
+                {
+                    Console.WriteLine("This AddressBook is also present");
+                }
+                else
+                {
+                    recordsByCity.Add(city.ToLower(), new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
+                }
+            }
+        }
         public void AddPersonsInDictionaryByCityName()
         {
             foreach (var city in cityName)
             {
-                foreach (var content in dict.Keys) 
+                CityDictionary(city);
+                foreach (var citykey in recordsByCity.Keys)
                 {
-                    foreach (var value in dict[content].ToList()) 
+                    if (recordsByCity[city].Count == 0)
                     {
-                        if (value.city == city)
+                        foreach (var content in dict.Keys)
                         {
-                           recordsByCity[city].Add(value);
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.city == city)
+                                {
+                                    recordsByCity[city].Add(value);
+                                }
+                            }
                         }
                     }
-                }                
+                    else
+                    {
+                        foreach (var content in dict.Keys)
+                        {
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.city == city)
+                                {
+                                    recordsByCity[city].Add(value);
+                                }
+                            }
+                        }
+                    }
+
+                }
             }
         }
-        /// <summary>
-        /// Maintain dictionary of persons by state name 
-        /// </summary>
-        public void AddPersonsInDictionaByStateName()
+        public void StateDictionary(string state) // class method to create new address book and store it in dictionary
+        {
+
+            if (recordsByState.Count == 0) // Checking that dictionary is empty or not
+            {
+                recordsByState.Add(state.ToLower(), new List<PersonInput>()); // // creating key value pair where address book name is key and all the redord of address book as value
+            }
+            else
+            {
+                if (recordsByState.ContainsKey(state.ToLower())) // Checking that address book given by user is already present in dictionary or not
+                {
+                    Console.WriteLine("This AddressBook is also present");
+                }
+                else
+                {
+                    recordsByState.Add(state.ToLower(), new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
+                }
+            }
+        }
+        public void AddPersonsInDictionaryByStateName()
         {
             foreach (var state in stateName)
             {
-                foreach (var content in dict.Keys)
+                StateDictionary(state);
+                foreach (var statekey in recordsByCity.Keys)
                 {
-                    foreach (var value in dict[content].ToList()) 
+                    if (recordsByState[state].Count == 0)
                     {
-                        if (value.state == state)
+                        foreach (var content in dict.Keys)
                         {
-                           recordsByState[state].Add(value);
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.state == state)
+                                {
+                                    recordsByState[state].Add(value);
+                                }
+                            }
                         }
                     }
-                
+                    else
+                    {
+                        foreach (var content in dict.Keys)
+                        {
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.state == state)
+                                {
+                                    recordsByState[state].Add(value);
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -453,6 +520,16 @@ namespace AddressBookSystem
             }
             return 0;
         }
-        
+        /// <summary>
+        /// Display all the records in alphabetically order by person first name
+        /// </summary>
+        public void SortByPersonName()
+        {
+            foreach (var content in dict.Keys.ToList()) 
+            {
+                dict[content] = dict[content].OrderBy(x => x.fName).ToList();
+            }
+            DisplayDictionary();
+        }
     }
 }
