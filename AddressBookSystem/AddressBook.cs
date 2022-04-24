@@ -316,39 +316,6 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void AddPersonsInDictionaryByCityName() // Class method to display all the records of all address book
-        {
-            foreach (var city in cityName)
-            {
-                foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
-                {
-                    foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
-                    {
-                        if (value.city == city)
-                        {
-                           recordsByCity[city].Add(value);
-                        }
-                    }
-                }                
-            }
-        }
-        public void AddPersonsInDictionaByStateName() // Class method to display all the records of all address book
-        {
-            foreach (var state in stateName)
-            {
-                foreach (var content in dict.Keys) // Accessing all the address book name of dictionary
-                {
-                    foreach (var value in dict[content].ToList()) // Accessing all the address book records  by dictionary key
-                    {
-                        if (value.state == state)
-                        {
-                           recordsByState[state].Add(value);
-                        }
-                    }
-                
-                }
-            }
-        }
         public void DisplayPersonsByStateName(string sName) // Class method to display all the records of all address book
         {
             foreach (var state in stateName)
@@ -380,5 +347,116 @@ namespace AddressBookSystem
                 }
             }
         }
+        public void CityDictionary(string city) // class method to create new address book and store it in dictionary
+        {
+
+            if (recordsByCity.Count == 0) // Checking that dictionary is empty or not
+            {
+                recordsByCity.Add(city.ToLower(), new List<PersonInput>()); // // creating key value pair where address book name is key and all the redord of address book as value
+            }
+            else
+            {
+                if (recordsByCity.ContainsKey(city.ToLower())) // Checking that address book given by user is already present in dictionary or not
+                {
+                    Console.WriteLine("This city is already present");
+                }
+                else
+                {
+                    recordsByCity.Add(city.ToLower(), new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
+                }
+            }
+        }
+        public void AddPersonsInDictionaryByCityName()
+        {
+            foreach (var city in cityName)
+            {
+                CityDictionary(city);
+                foreach (var citykey in recordsByCity.Keys)
+                {
+                    if (recordsByCity[city].Count == 0)
+                    {
+                        foreach (var content in dict.Keys)
+                        {
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.city == city)
+                                {
+                                    recordsByCity[city].Add(value);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var content in dict.Keys)
+                        {
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.city == city)
+                                {
+                                    recordsByCity[city].Add(value);
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+        public void StateDictionary(string state) // class method to create new address book and store it in dictionary
+        {
+
+            if (recordsByState.Count == 0) // Checking that dictionary is empty or not
+            {
+                recordsByState.Add(state.ToLower(), new List<PersonInput>()); // // creating key value pair where address book name is key and all the redord of address book as value
+            }
+            else
+            {
+                if (recordsByState.ContainsKey(state.ToLower())) // Checking that address book given by user is already present in dictionary or not
+                {
+                     Console.WriteLine("This state is already present");
+                }
+                else
+                {
+                    recordsByState.Add(state.ToLower(), new List<PersonInput>()); // creating key value pair where address book name is key and all the redord of address book as value
+                }
+            }
+        }
+        public void AddPersonsInDictionaryByStateName()
+        {
+            foreach (var state in stateName)
+            {
+                StateDictionary(state);
+                foreach (var statekey in recordsByCity.Keys)
+                {
+                    if (recordsByState[state].Count == 0)
+                    {
+                        foreach (var content in dict.Keys)
+                        {
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.state == state)
+                                {
+                                    recordsByState[state].Add(value);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var content in dict.Keys)
+                        {
+                            foreach (var value in dict[content].ToList())
+                            {
+                                if (value.state == state)
+                                {
+                                    recordsByState[state].Add(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }        
     }
 }
