@@ -25,7 +25,8 @@ namespace AddressBookSystem
                 Console.WriteLine("7. Numbers of persons count by City name");
                 Console.WriteLine("8. Numbers of persons count by State name");
                 Console.WriteLine("9. Display All the records in Alphabetically order By person first name");
-                Console.WriteLine("10. Exit");
+                Console.WriteLine("10. Display all the records by City,State or Zip code");
+                Console.WriteLine("11. Exit");
                 Console.WriteLine("\nEnter your choice : ");
                 
                 int ch = Convert.ToInt32(Console.ReadLine());// Storing a user choice in variable
@@ -102,7 +103,7 @@ namespace AddressBookSystem
                         records.DisplayPersonsByStateName(state);
                         break;
                     case 6:
-                        records.AddPersonsInDictionaByStateName();
+                        records.AddPersonsInDictionaryByStateName();
                         records.AddPersonsInDictionaryByCityName();
                         break;
                     case 7:
@@ -110,19 +111,40 @@ namespace AddressBookSystem
                         Console.WriteLine("\nEnter any city name : ");
                         string cn = Console.ReadLine();
                         int cc = records.CountPersonsByCity(cn);
-                        Console.WriteLine(cc);
+                        Console.WriteLine($"Total number of records where city name is {cn} are : {cc} ");
                         break;
                     case 8:
-                        records.AddPersonsInDictionaByStateName();
+                        records.AddPersonsInDictionaryByStateName();
                         Console.WriteLine("\nEnter any state name : ");
                         string sn = Console.ReadLine();
                         int sc = records.CountPersonsByState(sn);
-                        Console.WriteLine(sc);
+                        Console.WriteLine($"Total number of records where city name is {sn} are : {sc} ");
                         break;
                     case 9:
                         records.SortByPersonName();
+                        records.DisplayDictionary();
                         break;
                     case 10:
+                        Console.WriteLine("How you want to sort all the records Address book vise : ");
+                        Console.WriteLine("1.By City\n2.By State\n3.By ZipCode");
+                        int choice = Convert.ToInt32(Console.ReadLine());
+                        switch(choice)
+                        {
+                            case 0:
+                                records.SortByCity();
+                                records.DisplayDictionary();
+                                break;
+                            case 1:
+                                records.SortByState();
+                                records.DisplayDictionary();
+                                break;
+                            case 2:
+                                records.SortByZip();
+                                records.DisplayDictionary();
+                                break;
+                        }
+                        break;
+                    case 11:
                         System.Environment.Exit(0); // Exit
                         break;
                 }

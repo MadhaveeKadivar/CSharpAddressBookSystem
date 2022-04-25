@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="AddressBookMainClass.cs" />
     <Compile Include="AddressBook.cs" />
-    <Compile Include="MaintainDictionary.cs" />
     <Compile Include="PersonInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

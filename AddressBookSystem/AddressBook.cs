@@ -194,11 +194,6 @@ namespace AddressBookSystem
             }                   
         }
 
-        internal void AddPersonsInDictionaByStateName()
-        {
-            throw new NotImplementedException();
-        }
-
         string fn, ln;
         /// <summary>
         /// Updating records in Dictionary 
@@ -525,11 +520,41 @@ namespace AddressBookSystem
         /// </summary>
         public void SortByPersonName()
         {
-            foreach (var content in dict.Keys.ToList()) 
+            foreach (var content in dict.Keys.ToList())
             {
                 dict[content] = dict[content].OrderBy(x => x.fName).ToList();
             }
-            DisplayDictionary();
         }
+        /// <summary>
+        /// Display all the records in alphabetically order by person city name
+        /// </summary>
+        public void SortByCity()
+        {
+            foreach (var content in dict.Keys.ToList())
+            {
+                dict[content] = dict[content].OrderBy(x => x.city).ToList();
+            }
+        }
+        /// <summary>
+        /// Display all the records in alphabetically order by person state name
+        /// </summary>
+        public void SortByState()
+        {
+            foreach (var content in dict.Keys.ToList())
+            {
+                dict[content] = dict[content].OrderBy(x => x.state).ToList();
+            }
+        }
+        /// <summary>
+        /// Display all the records order by person Zip code
+        /// </summary>
+        public void SortByZip()
+        {
+            foreach (var content in dict.Keys.ToList())
+            {
+                dict[content] = dict[content].OrderBy(x => x.zip).ToList();
+            }
+        }
+
     }
 }
